@@ -1,0 +1,80 @@
+:root {
+    --cor-branco: #F9FAFB;
+    --cor-preto: #030712;
+    --cor-cinza-escuro: #1F2937;
+    --cor-cinza-medio: #3B3B3B;
+    --cor-cinza-claro: #929EAF;
+    --cor-roxo: #6D28D9;
+    --cor-vermelho: #DC3545;
+}
+
+.carrinho{
+    background-color: var(--cor-preto);
+}
+
+.menu-header{
+    background-color: var(--cor-preto);
+}
+
+.gradient-line{
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, transparent 0%, #6D28D9 40%, #6D28D9 60%, transparent 100%);
+}
+
+.btn.btn-primary.me-2{
+    background-color: var(--cor-cinza-escuro);
+}
+
+#logo-home {
+    color: #f6f6f7;
+    text-decoration: none;
+}
+
+#logo-home:hover {
+    color: var(--cor-roxo);
+}
+
+.d-flex.justify-content-end.align-items-center{
+    color: var(--cor-branco);
+}
+
+.table{
+    margin-top: 10%;
+}
+
+.table thead > tr > td,
+.table thead > tr > th {
+    color: var(--cor-branco);
+    border: 1px solid var(--cor-cinza-escuro); /* Cor das bordas das células */
+    background-color: var(--cor-roxo);
+}
+
+.table tbody > tr > th,
+.table tbody > tr > td,
+.table tfoot > tr > td{
+    color: var(--cor-branco);
+    border: 1px solid var(--cor-cinza-escuro); /* Cor das bordas das células */
+    background-color: var(--cor-preto);
+}
+
+
+.table tfoot > tr > th {
+    color: var(--cor-branco);
+    border: 1px solid var(--cor-cinza-escuro); /* Cor das bordas das células */
+    background-color: var(--cor-roxo);
+}
+
+.btn-finalizar {
+    display: inline-block;
+    width: 100%;
+    color: var(--cor-branco);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;   
+    background-color: var(--cor-vermelho);
+}
