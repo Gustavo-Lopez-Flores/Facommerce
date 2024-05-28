@@ -1,0 +1,60 @@
+:root {
+    --cor-branco: #F9FAFB;
+    --cor-preto: #030712;
+    --cor-cinza-escuro: #1F2937;
+    --cor-cinza-medio: #3B3B3B;
+    --cor-cinza-claro: #929EAF;
+    --cor-roxo: #6D28D9;
+    --cor-vermelho: #DC3545;
+}
+
+.home{
+    background-color: var(--cor-preto);
+}
+
+.card-link{
+    text-decoration: none;
+    color: var(--cor-branco);
+}
+
+.menu-header{
+    background-color: var(--cor-preto);
+}
+
+.gradient-line{
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, transparent 5%, #6D28D9 40%, #6D28D9 60%, transparent 90%);
+}
+
+.btn.btn-primary.me-2{
+    background-color: var(--cor-cinza-escuro);
+}
+
+.btn.btn-primary{
+    background-color: var(--cor-roxo);
+}
+
+.card-body.text-center{
+    color: var(--cor-branco);
+    background-color: var(--cor-preto);
+}
+
+.btn.tipo{
+    color: var(--cor-branco);
+    border-color: var(--cor-branco);
+    background-color: var(--cor-cinza-escuro);
+}
+
+#logo-home {
+    color: #f6f6f7;
+    text-decoration: none;
+}
+
+#logo-home:hover {
+    color: var(--cor-roxo);
+}
+
+sub{
+    color: var(--cor-cinza-claro);
+}

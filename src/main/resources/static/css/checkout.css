@@ -1,0 +1,44 @@
+:root {
+    --cor-branco: #F9FAFB;
+    --cor-preto: #030712;
+    --cor-cinza-escuro: #1F2937;
+    --cor-cinza-medio: #3B3B3B;
+    --cor-cinza-claro: #929EAF;
+    --cor-roxo: #6D28D9;
+    --cor-vermelho: #DC3545;
+}
+
+.checkout{
+    background-color: var(--cor-preto);
+}
+
+.menu-header{
+    background-color: var(--cor-preto);
+}
+
+.gradient-line{
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, transparent 0%, #6D28D9 40%, #6D28D9 60%, transparent 100%);
+}
+
+.btn.btn-primary.me-2{
+    background-color: var(--cor-cinza-escuro);
+}
+
+.btn.btn-primary.btn-block{
+    background-color: var(--cor-vermelho);
+}
+
+#logo-home {
+    color: #f6f6f7;
+    text-decoration: none;
+}
+
+#logo-home:hover {
+    color: var(--cor-roxo);
+}
+
+.card-header.text-white{
+    background-color: var(--cor-roxo);
+}
