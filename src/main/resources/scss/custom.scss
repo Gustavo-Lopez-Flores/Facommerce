@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$body-bg-dark: rgb(3, 7, 18);
+$border-color-translucent-dark: rgba(255, 255, 255, 0.2);
+$body-color-dark: rgb(255, 255, 255);
+
+$primary: #6D28D9;
+
+@import "../bootstrap/scss/bootstrap";
+
+.gradient-line{
+    height: 4px;
+    background: linear-gradient(to right, transparent, $primary, transparent);
+}
+
+
+sub {
+    position: initial;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;    
+}
+
+.card:hover {
+    background-color: rgba(desaturate(lighten($body-bg-dark, 10%), 50%), .3);
+}
+
+.product {
+    min-height: 10rem;
+}
+
+@include media-breakpoint-up(sm) {
+    .product {
+        min-height: 25rem;
+    }
+}
