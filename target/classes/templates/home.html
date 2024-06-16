@@ -1,152 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../static/css/home.css">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
-<body class="home">
+<body>
     <!-- Header -->
-    <header class="menu p-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-2">
-                <a href="home.html" class="d-flex align-items-center" id="logo-home">
-                    <img src="https://www.facom.ufms.br/wp-content/uploads/2015/12/grafo_facom.png" alt="Logo" height="30" class="me-2">
-                    <strong class="d-none d-sm-inline">FACOMMERCE</strong>
-                </a>
-            </div>
-            <div class="d-flex align-items-center">
-                <input type="text" class="form-control me-2" placeholder="Procurar produtos...">
-                <a href="admin.html" class="btn btn-primary me-2">Cadastrar</a>
-                <a href="cart.html" class="btn btn-primary me-2">Carrinho</a>
-                <a href="login.html" class="btn btn-primary me-2">Entrar</a>
-            </div>
-        </div>
-    </header>
-
-    <div class="gradient-line"></div>        
+    <header th:replace="~{/fragments/general.html :: header}"></header>
 
     <!-- Main (Lista de Produtos) -->
     <main class="container my-5">
-        <div class="row">
-            <!-- Produto 1 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Acer Nitro 5</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fbenchpromos.com%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fmedia.discordapp.net%252Fattachments%252F966771498956234762%252F1116108162643271740%252Fimage-removebg-preview.png%253Fwidth%253D625%2526height%253D625%26w%3D640%26q%3D75&amp;w=750&amp;q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 4.899,99 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+        <div class="row gy-3">
+            <!-- Produto -->
+            <div class="col-md-6 col-lg-3" th:each="produto : ${produtos}">
+                <div class="card h-100 bg-primary:hover">
+                    <div class="card-header text-center bg-transparent" th:text="${produto.categoria}"></div>
+                    <div class="card-body">
+                        <a th:href="@{produto/{id}(id=${produto.id})}" class="text-reset text-decoration-none">
+                            <div class="row product align-content-between align-items-center">
+                                <div class="col-sm-12">
+                                    <h3 class="card-title line-clamp-3 fw-medium h6" th:text="${produto.nome}"></h3>
+                                </div>
+                                <div class="col-sm-6 col-md-12 col-5">       
+                                    <img th:src="${produto.imageUrl}" class="img-fluid" th:alt="${produto.nome}">
+                                </div>
+                                <div class="col">
+                                    <h4 class="card-text fw-bold">R$ <span th:text="${#numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></span> <sub class="text-secondary fw-normal">à vista</sub></h4>    
+                                </div>
+                            </div>
+                        </a>
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <a href="#" class="btn btn-primary w-100 text-uppercase">Comprar</a>
+                            </div>
                         </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 2 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Dell G15 5530</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fimages-ext-1.discordapp.net%2Fexternal%2F3JLZq7jvgclFHFvQEyaHlJy5nMtLG1mck0sImr9PeD0%2F%253Ffmt%253Dpng-alpha%2526pscan%253Dauto%2526scl%253D1%2526hei%253D402%2526wid%253D554%2526qlt%253D100%252C1%2526resMode%253Dsharp2%2526size%253D554%252C402%2526chrss%253Dfull%2Fhttps%2Fi.dell.com%2Fis%2Fimage%2FDellContent%2Fcontent%2Fdam%2Fss2%2Fproduct-images%2Fdell-client-products%2Fnotebooks%2Fg-series%2Fg15-5530%2Fmedia-gallery%2Fgray%2Fnon-touch%2F4-zone-rgb-kb%2Fnotebook-laptop-g15-5530-gray-gallery-1.psd%3Fformat%3Dwebp&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 4.513,50 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 3 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Lenovo ideapad Gaming 3i</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fmedia.discordapp.net%2Fattachments%2F966771498956234762%2F1112201340492455966%2Fimage-removebg-preview.png&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 3.419,10 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 4 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Avell STORM BS I7 4050</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Feshop-api.avell.com.br%2Fstorage%2F5%2Fcatalog%2FproductMedia%2F64ecb44862fca3811%2F64ecb4b57c6157604.png&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 5.774,89 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-        <!-- Segunda Linha de Produtos -->
-        <div class="row">
-            <!-- Produto 5 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Galaxy Book3 Ultra</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fmedia.discordapp.net%2Fattachments%2F719083969416790026%2F1123296046185988146%2Fimage-removebg-preview.png%3Fwidth%3D625%26height%3D625&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 11.699,10 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 6 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook ASUS Vivobook 16X</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fmedia.discordapp.net%2Fattachments%2F966771498956234762%2F1142616109435068507%2Fimage-removebg-preview.png&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 4.084,99 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 7 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">                        
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Gamer Asus Rog Strix G16,</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fmedia.discordapp.net%2Fattachments%2F966771498956234762%2F1112701455216943174%2Fimage-removebg-preview.png%3Fwidth%3D625%26height%3D625&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 10.924,99 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <!-- Produto 8 -->
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="#" class="btn tipo">Notebooks</a>
-                    <a href="product-details.html" class="card-link">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Notebook Avell Storm X 4080</h5>
-                            <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Feshop-api.avell.com.br%2Fstorage%2F5%2Fcatalog%2FproductMedia%2F64a4877c084798927%2F64a489f78fed74929.png&w=750&q=75" class="img-fluid mb-3" alt="Notebook">
-                            <p class="card-text"><h4>R$ 19.774,89 <sub>à vista</sub></h4></p>
-                            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </div>

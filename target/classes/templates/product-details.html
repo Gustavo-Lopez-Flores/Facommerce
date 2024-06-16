@@ -1,38 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../static/css/product-details.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- Bootstrap -->
-    <title>Detalhes do Produto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title th:text="${produto.nome}"></title>
 </head>
 <body class="product-details">
     <!-- Header -->
-    <header class="menu p-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a href="home.html" class="d-flex align-items-center" id="logo-home">
-                <img src="https://www.facom.ufms.br/wp-content/uploads/2015/12/grafo_facom.png" alt="Logo" height="30" class="me-2">
-                <strong class="d-none d-sm-inline">FACOMMERCE</strong>
-            </a>
-            <a href="home.html" class="btn btn-primary me-2">Voltar</a>
-        </div>
-    </header>
+    <header th:replace="~{/fragments/general.html :: header}"></header>    
 
-    <div class="gradient-line"></div>        
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="https://benchpromos.com.br/_next/image?url=https%3A%2F%2Fbenchpromos.com%2F_next%2Fimage%3Furl%3Dhttps%253A%252F%252Fmedia.discordapp.net%252Fattachments%252F966771498956234762%252F1116108162643271740%252Fimage-removebg-preview.png%253Fwidth%253D625%2526height%253D625%26w%3D640%26q%3D75&w=750&q=75" alt="Imagem do Produto" class="product-image">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-6">
+                <img th:src="${produto.imageUrl}" th:alt="${produto.nome}" class="img-fluid">
             </div>
-            <div class="col-md-6">
-                <h2 class="mb-4">Detalhes do Produto</h2>
-                <p><strong>Tipo:</strong> Notebook</p>
-                <p><strong>Nome:</strong> Notebook Acer Nitro 5 AN515-47-R5SU</p>
-                <p><strong>Preço:</strong> R$ 4.899,99 <sub>à vista</sub></p>
+            <div class="col">
+                <h3 class="mb-4"><span th:text="${produto.nome}"></span></h3>
+                <h2 class="fw-semibold">R$ <span th:text="${#numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></span> <sub class="text-secondary fw-normal">à vista</sub></h2>
+                <ul class="list-unstyled lh-lg">
+                    <li><strong>Tipo: </strong><span th:text="${produto.categoria}"></span></li>
+                    <li><strong>Cor: </strong>Branco</li>
+                </ul>
                 <hr>
                 <h4>Especificações Técnicas:</h4>
                 <ul>
@@ -42,7 +34,10 @@
                     <li>Tela: 15.6" Full HD</li>
                     <li>Sistema Operacional: Linux</li>
                 </ul>
-                <button class="btn btn-primary mt-3">Adicionar ao Carrinho</button>
+                <button class="btn btn-primary mt-3 text-uppercase fw-bold px-5 py-3">
+                    <span class="material-symbols-outlined align-bottom">shopping_cart</span>
+                    Comprar
+                </button>
             </div>
         </div>
     </div>
