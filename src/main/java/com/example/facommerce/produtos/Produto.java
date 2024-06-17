@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,34 +15,49 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
+    
+    @Column(nullable = false)
     private String nome;
-    @Column
-    private float preco;
-    @Column
-    private String categoria;
+    
     @Column(columnDefinition = "TEXT")
-    private String imageUrl;
+    private String descricao;
+    
+    @Column(nullable = false)
+    private float preco;
+    
+    @Column(nullable = false)
+    private int quantidadeEstoque;
+    
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
+    
+    @Column(columnDefinition = "TEXT")
+    private String imagemUrl;
 
-    public Produto(String nome, float preco, String categoria, String imageUrl) {
+    public Produto(String nome, String descricao, float preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
         this.nome = nome;
+        this.descricao = descricao;
         this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
         this.categoria = categoria;
-        this.imageUrl = imageUrl;
+        this.imagemUrl = imagemUrl;
     }
 
-    public Produto(Long id, String nome, float preco, String categoria, String imageUrl) {
+    public Produto(Long id, String nome, String descricao, float preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
         this.id = id;
         this.nome = nome;
+        this.descricao = descricao;
         this.preco = preco;
+        this.quantidadeEstoque = quantidadeEstoque;
         this.categoria = categoria;
-        this.imageUrl = imageUrl;
+        this.imagemUrl = imagemUrl;
     }
 
     @Deprecated
-    public Produto() {
-    }
+    public Produto() {}
 
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -53,6 +70,14 @@ public class Produto {
         this.nome = nome;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public float getPreco() {
         return preco;
     }
@@ -61,19 +86,27 @@ public class Produto {
         this.preco = preco;
     }
 
-    public String getCategoria() {
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImagemUrl() {
+        return imagemUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
 }
