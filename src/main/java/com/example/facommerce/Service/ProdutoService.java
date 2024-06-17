@@ -3,9 +3,8 @@ package com.example.facommerce.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.facommerce.Model.Produto;
 import com.example.facommerce.Repository.ProdutoRepository;
-
-import java.util.Optional;
 
 @Service
 public class ProdutoService {

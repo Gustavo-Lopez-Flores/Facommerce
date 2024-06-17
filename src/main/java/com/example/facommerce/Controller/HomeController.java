@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.facommerce.produtos.Produto;
-import com.example.facommerce.produtos.ProdutoService;
+import com.example.facommerce.Model.Produto;
+import com.example.facommerce.Service.ProdutoService;
 
 @Controller
 public class HomeController {
