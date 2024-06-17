@@ -1,5 +1,8 @@
 package com.example.facommerce.Model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,27 +19,33 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String nome;
-    
+
     @Column(columnDefinition = "TEXT")
     private String descricao;
-    
+
     @Column(nullable = false)
-    private float preco;
-    
+    private double preco;
+
     @Column(nullable = false)
     private int quantidadeEstoque;
-    
+
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
-    
+
     @Column(columnDefinition = "TEXT")
     private String imagemUrl;
 
-    public Produto(String nome, String descricao, float preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemCarrinho> itensCarrinho;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedido> itensPedido;
+
+    public Produto(String nome, String descricao, double preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -44,7 +54,7 @@ public class Produto {
         this.imagemUrl = imagemUrl;
     }
 
-    public Produto(Long id, String nome, String descricao, float preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
+    public Produto(Long id, String nome, String descricao, double preco, int quantidadeEstoque, Categoria categoria, String imagemUrl) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -78,12 +88,12 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
-        this.preco = preco;
+    public void setPreco(double d) {
+        this.preco = d;
     }
 
     public int getQuantidadeEstoque() {
