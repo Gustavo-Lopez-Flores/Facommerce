@@ -26,7 +26,7 @@ sub {
     overflow: hidden;    
 }
 
-.card:hover {
+.card-hover:hover {
     background-color: rgba(desaturate(lighten($body-bg-dark, 10%), 50%), .3);
 }
 
