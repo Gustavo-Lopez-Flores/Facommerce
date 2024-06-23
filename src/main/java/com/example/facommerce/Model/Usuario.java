@@ -1,5 +1,6 @@
 package com.example.facommerce.Model;
 
+import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -8,8 +9,7 @@ import jakarta.persistence.*;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String cpf;
 
     @Column(nullable = false)
     private String nome;
@@ -21,7 +21,7 @@ public class Usuario {
     private String senha;
 
     @Column(nullable = false)
-    private String endereco;
+    private Date dataNascimento;
 
     @Column(nullable = false)
     private String telefone;
@@ -30,40 +30,31 @@ public class Usuario {
     @Column(nullable = false)
     private TipoUsuario tipoUsuario;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Carrinho> carrinhos;
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Carrinho carrinhoId;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> pedidos;
 
     public Usuario() {}
 
-    public Usuario(String nome, String email, String senha, String endereco, String telefone, TipoUsuario tipoUsuario) {
+    public Usuario(String cpf, String nome, String telefone, Date dataNascimento, String email, String senha, TipoUsuario tipoUsuario) {
+        this.cpf = cpf;
         this.nome = nome;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
         this.email = email;
         this.senha = senha;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Usuario(Long id, String nome, String email, String senha, String endereco, String telefone, TipoUsuario tipoUsuario) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.endereco = endereco;
-        this.telefone = telefone;
         this.tipoUsuario = tipoUsuario;
     }
 
     // Getters e Setters
-    public Long getId() {
-        return id;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -72,6 +63,10 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getEmail() {
@@ -88,14 +83,6 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getTelefone() {
