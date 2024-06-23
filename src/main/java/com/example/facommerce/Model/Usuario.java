@@ -9,6 +9,10 @@ import jakarta.persistence.*;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @Column(nullable = false)
@@ -49,6 +53,10 @@ public class Usuario {
     }
 
     // Getters e Setters
+    public Long getId() {
+        return id;
+    }
+
     public String getCpf() {
         return cpf;
     }
