@@ -4,36 +4,34 @@
 <meta charset="UTF-8" />
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-<link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-    <div th:fragment="header">
-        <header>
-            <div class="container py-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-3">
-                        <a href="/" class="text-reset text-decoration-none">
-                            <img src="https://www.facom.ufms.br/wp-content/uploads/2015/12/grafo_facom.png" alt="Logo" height="30" class="me-2">
-                            <span><strong>FACCOMERCE</strong></span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <div class="row row-cols-auto justify-content-end g-2">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Procurar produtos...">
-                            </div>
-                            <div class="col">
-                                <a href="cart.html" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">shopping_cart</a>
-                            </div>
-                            <div class="col">
-                                <a href="login.html" class="btn btn-primary">Entrar</a>
-                            </div>
+    <header th:fragment="header(usuarioId)" class="mb-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-lg-6 col-md-3">
+                    <a href="/" class="text-reset text-decoration-none">
+                        <img src="https://www.facom.ufms.br/wp-content/uploads/2015/12/grafo_facom.png" alt="Logo" height="30" class="me-2">
+                        <span><strong>FACCOMERCE</strong></span>
+                    </a>
+                </div>
+                <div class="col">
+                    <div class="row row-cols-auto justify-content-end g-2">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Procurar produtos...">
+                        </div>
+                        <div class="col">
+                            <a href="carrinho" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">shopping_cart</a>
+                        </div>
+                        <div class="col">
+                            <a th:if="${usuarioId == null}" href="login" class="btn btn-primary">Entrar</a>
+                            <a th:if="${usuarioId != null}" href="logout" class="btn btn-primary">Sair</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="gradient-line"></div>        
-        </header>
-    </div>
+        </div>
+        <div class="gradient-line"></div>
+    </header>
 </body>
 </html>
