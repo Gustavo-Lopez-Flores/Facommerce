@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header th:replace="~{/fragments/general.html :: header(usuarioId=${usuarioId})}"></header>
+    <header th:replace="~{/fragments/general.html :: header(usuarioId=${usuarioId}, tipoUsuario=${tipoUsuario})}"></header>
 
     <!-- Main (Lista de Produtos) -->
     <main class="container my-5">
