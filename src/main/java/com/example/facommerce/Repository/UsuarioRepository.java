@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.example.facommerce.Model.Usuario;
 
 @Repository
-public interface UsuarioRepository extends CrudRepository<Usuario, String> {
+public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     @Query(value="SELECT * FROM usuarios WHERE email = :email AND senha = :senha", nativeQuery = true)
     public Usuario login(String email, String senha);
 }
