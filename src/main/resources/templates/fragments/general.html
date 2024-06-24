@@ -21,12 +21,12 @@
                             <input type="text" class="form-control" placeholder="Procurar produtos...">
                         </div>
                         <div class="col">
-                            <a th:if="${tipoUsuario == 'CLIENTE'}" href="/carrinho" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">shopping_cart</a>
-                            <a th:if="${tipoUsuario == 'ADMIN'}" href="/admin" class="btn btn-primary">package_2</a>
+                            <!-- <a th:if="${tipoUsuario == 'CLIENTE'}" href="/carrinho" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">shopping_cart</a> -->
+                            <a th:if="${tipoUsuario == 'ADMIN'}" href="/admin" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">package_2</a>
                         </div>
                         <div class="col">
                             <a th:if="${usuarioId == null}" href="/login" class="btn btn-primary">Entrar</a>
-                            <a th:if="${usuarioId != null}" href="/logout" class="btn btn-primary">Sair</a>
+                            <a th:if="${usuarioId != null}" href="/logout" class="btn btn-secondary">Sair</a>
                         </div>
                     </div>
                 </div>

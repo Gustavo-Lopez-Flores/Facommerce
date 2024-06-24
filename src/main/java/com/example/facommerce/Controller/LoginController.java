@@ -35,7 +35,6 @@ public class LoginController {
             CookieService.setCookie(response, "usuarioId", usuario.getCpf(), maxAge);
             CookieService.setCookie(response, "tipoUsuario", ehAdmin  ? "ADMIN" : "CLIENTE", maxAge);
             ModelAndView mav = new ModelAndView("redirect:/");
-            mav.addObject("tipoUsuario", usuario.getTipoUsuario());
             return mav;
         }
         return new ModelAndView("redirect:/login");

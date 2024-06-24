@@ -13,9 +13,13 @@ import jakarta.servlet.http.HttpServletResponse;
 public class GlobalInterceptor implements HandlerInterceptor {
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        if (modelAndView == null) {
+            return;
+        }
+
         if (CookieService.getCookie(request, "usuarioId") != null) {
+            modelAndView.addObject("tipoUsuario", CookieService.getCookie(request, "tipoUsuario"));
             modelAndView.addObject("usuarioId", CookieService.getCookie(request, "usuarioId"));
         }
     }

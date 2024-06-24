@@ -20,12 +20,4 @@ public class AuthInterceptor implements HandlerInterceptor {
         response.sendRedirect("/login");
         return false;
     }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        if (CookieService.getCookie(request, "usuarioId") != null) {
-            modelAndView.addObject("usuarioId", CookieService.getCookie(request, "usuarioId"));
-        }
-    }
 }
