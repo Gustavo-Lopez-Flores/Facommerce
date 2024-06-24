@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.facommerce.DTO.LoginDTO;
 import com.example.facommerce.Model.Usuario;
@@ -25,14 +26,16 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String logar(@ModelAttribute LoginDTO loginDTO, boolean lembrar, HttpServletResponse response) {
+    public ModelAndView logar(@ModelAttribute LoginDTO loginDTO, boolean lembrar, HttpServletResponse response) {
         Usuario usuario = usuarioService.login(loginDTO.getEmail(), loginDTO.getSenha());
         if (usuario != null) {
             int maxAge = lembrar ? 60 * 60 * 24 * 30 : 60 * 60;
             CookieService.setCookie(response, "usuarioId", usuario.getCpf(), maxAge);
-            return "redirect:/";
+            ModelAndView mav = new ModelAndView("redirect:/");
+            mav.addObject("tipoUsuario", usuario.getTipoUsuario());
+            return mav;
         }
-        return "redirect:/login";
+        return new ModelAndView("redirect:/login");
     }
 
     @GetMapping("/logout")
