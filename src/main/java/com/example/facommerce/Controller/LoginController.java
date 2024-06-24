@@ -18,7 +18,7 @@ public class LoginController {
 
     @Autowired
     private UsuarioService usuarioService;
-    
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -26,9 +26,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String logar(@ModelAttribute LoginDTO loginDTO, boolean lembrar, HttpServletResponse response) {
-        System.out.println(lembrar);
         Usuario usuario = usuarioService.login(loginDTO.getEmail(), loginDTO.getSenha());
-        System.out.println(usuario);
         if (usuario != null) {
             int maxAge = lembrar ? 60 * 60 * 24 * 30 : 60 * 60;
             CookieService.setCookie(response, "usuarioId", usuario.getCpf(), maxAge);
