@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-    <header th:fragment="header(usuarioId)" class="mb-5">
+    <header th:fragment="header(usuarioId, tipoUsuario)" class="mb-5">
         <div class="container py-2">
             <div class="row">
                 <div class="col-lg-6 col-md-3">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <a th:if="${tipoUsuario == 'CLIENTE'}" href="carrinho" class="material-symbols-outlined align-middle p-2 btn btn-outline-primary">shopping_cart</a>
-                            <a th:if="${tipoUsuario == 'ADMIN'}" href="admin" class="btn btn-primary">Cadastrar Produto</a>
+                            <a th:if="${tipoUsuario == 'ADMIN'}" href="admin" class="btn btn-primary">Cadastrar-se</a>
                         </div>
                         <div class="col">
                             <a th:if="${usuarioId == null}" href="login" class="btn btn-primary">Entrar</a>
