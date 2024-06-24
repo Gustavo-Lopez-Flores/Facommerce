@@ -27,11 +27,13 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ModelAndView logar(@ModelAttribute LoginDTO loginDTO, @RequestParam(name = "lembrar", defaultValue = "false") boolean lembrar, HttpServletResponse response) {
+    public ModelAndView logar(@ModelAttribute LoginDTO loginDTO, boolean lembrar, HttpServletResponse response) {
         Usuario usuario = usuarioService.login(loginDTO.getEmail(), loginDTO.getSenha());
         if (usuario != null) {
             int maxAge = lembrar ? 60 * 60 * 24 * 30 : 60 * 60;
+            boolean ehAdmin = true;
             CookieService.setCookie(response, "usuarioId", usuario.getCpf(), maxAge);
+            CookieService.setCookie(response, "tipoUsuario", ehAdmin  ? "ADMIN" : "CLIENTE", maxAge);
             ModelAndView mav = new ModelAndView("redirect:/");
             mav.addObject("tipoUsuario", usuario.getTipoUsuario());
             return mav;

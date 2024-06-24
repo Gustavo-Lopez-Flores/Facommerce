@@ -1,6 +1,7 @@
 package com.example.facommerce.Service;
 
 import java.sql.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,12 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario login(String email, String senha) {
-        return repository.login(email, senha);
-    }
-
     public Iterable<Usuario> listarTodos() {
         return repository.findAll();
     }
 
     public Usuario cadastrar(CadastroDTO cadastro) {
-        if(repository.findById(cadastro.getCpf()).isPresent()) {
+        if (repository.findByCpf(cadastro.getCpf()).isPresent()) {
             throw new RuntimeException("CPF já cadastrado");
         }
 
@@ -42,8 +39,14 @@ public class UsuarioService {
         return repository.save(novoUsuario);
     }
 
+    public Usuario login(String email, String senha) {
+        Optional<Usuario> usuarioOpt = repository.login(email, senha);
+        return usuarioOpt.orElseThrow(() -> new RuntimeException("Email ou senha incorretos"));
+    }
+
     public Usuario buscarPorCpf(String cpf) {
-        return repository.findById(cpf).get();
+        Optional<Usuario> usuarioOpt = repository.findByCpf(cpf);
+        return usuarioOpt.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
     public Usuario atualizar(String cpf, Usuario usuarioAtualizado) {
