@@ -16,15 +16,19 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
+    public Usuario login(String email, String senha) {
+        return repository.login(email, senha);
+    }
+
     public Iterable<Usuario> listarTodos() {
         return repository.findAll();
     }
-    
+
     public Usuario cadastrar(CadastroDTO cadastro) {
         if(repository.findById(cadastro.getCpf()).isPresent()) {
             throw new RuntimeException("CPF já cadastrado");
         }
-    
+
         Date dataNascimento = Date.valueOf(cadastro.getDataNascimento());
         Usuario novoUsuario = new Usuario(
             cadastro.getCpf().replaceAll("\\D", ""),
@@ -35,12 +39,7 @@ public class UsuarioService {
             cadastro.getSenha(),
             TipoUsuario.CLIENTE
         );
-        //novoUsuario.setTermo(usuario.termo);
         return repository.save(novoUsuario);
-    }
-
-    public Usuario login(String email, String senha) {
-        return repository.login(email, senha);
     }
 
     public Usuario buscarPorCpf(String cpf) {
