@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.facommerce.DTO.LoginDTO;
+import com.example.facommerce.Model.TipoUsuario;
 import com.example.facommerce.Model.Usuario;
 import com.example.facommerce.Service.CookieService;
 import com.example.facommerce.Service.UsuarioService;
@@ -31,7 +32,7 @@ public class LoginController {
         Usuario usuario = usuarioService.login(loginDTO.getEmail(), loginDTO.getSenha());
         if (usuario != null) {
             int maxAge = lembrar ? 60 * 60 * 24 * 30 : 60 * 60;
-            boolean ehAdmin = true;
+            boolean ehAdmin = usuario.getTipoUsuario().equals(TipoUsuario.ADMIN);
             CookieService.setCookie(response, "usuarioId", usuario.getCpf(), maxAge);
             CookieService.setCookie(response, "tipoUsuario", ehAdmin  ? "ADMIN" : "CLIENTE", maxAge);
             ModelAndView mav = new ModelAndView("redirect:/");
@@ -43,6 +44,7 @@ public class LoginController {
     @GetMapping("/logout")
     public String logout(HttpServletResponse response) {
         CookieService.setCookie(response, "usuarioId", "", 0);
+        CookieService.setCookie(response, "tipoUsuario", "", 0);
         return "redirect:/login";
     }
 }
