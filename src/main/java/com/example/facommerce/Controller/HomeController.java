@@ -2,38 +2,22 @@ package com.example.facommerce.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.facommerce.Model.Categoria;
-import com.example.facommerce.Model.Produto;
-import com.example.facommerce.Service.CategoriaService;
 import com.example.facommerce.Service.ProdutoService;
 
 @Controller
-@SessionAttributes({"usuarioId", "tipoUsuario"})
 public class HomeController {
 
     @Autowired
     private ProdutoService produtoService;
 
-    @Autowired
-    private CategoriaService categoriaService;
-
     @GetMapping("/")
-    public ModelAndView home(Model model) {
+    public ModelAndView home() {
         ModelAndView mv = new ModelAndView("home");
         mv.addObject("produtos", produtoService.listarTodos());
-        // Adiciona usuarioId e tipoUsuario ao modelo, se não estiverem presentes
-        if (!model.containsAttribute("usuarioId")) {
-            model.addAttribute("usuarioId", null);
-        }
-        if (!model.containsAttribute("tipoUsuario")) {
-            model.addAttribute("tipoUsuario", null);
-        }
         return mv;
     }
     

@@ -11,33 +11,36 @@
 </head>
 <body class="product-details">
     <!-- Header -->
-    <header th:replace="~{/fragments/general.html :: header(usuarioId=${usuarioId})}"></header>    
+    <header th:replace="~{/fragments/general.html :: header(usuarioId=${usuarioId}, tipoUsuario=${tipoUsuario})}"></header>    
 
     <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-sm-8 col-md-6">
+            <div class="col-sm-8 col-md-5">
                 <img th:src="${produto.imagemUrl}" th:alt="${produto.nome}" class="img-fluid">
             </div>
             <div class="col">
                 <h3 class="mb-4"><span th:text="${produto.nome}"></span></h3>
-                <h2 class="fw-semibold">R$ <span th:text="${#numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></span> <sub class="text-secondary fw-normal">à vista</sub></h2>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="fw-semibold">R$ <span th:text="${#numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></span> <sub class="text-secondary fw-normal">à vista</sub></h2>
+                    </div>
+                    <div class="col-5">
+                        <button class="btn btn-primary text-uppercase fw-bold px-5 py-3">
+                            <span class="material-symbols-outlined align-bottom">shopping_cart</span>
+                            Comprar
+                        </button>
+                    </div>
+                </div>
                 <ul class="list-unstyled lh-lg">
                     <li><strong>Tipo: </strong><span th:text="${produto.categoria.nome}"></span></li>
-                    <li><strong>Cor: </strong>Branco</li>
                 </ul>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="col card-body">
+                <h4>Descrição do produto</h4>
                 <hr>
-                <h4>Especificações Técnicas:</h4>
-                <ul>
-                    <li>Processador: AMD Ryzen 5 </li>
-                    <li>Memória RAM: 18GB</li>
-                    <li>Armazenamento: SSD 512GB</li>
-                    <li>Tela: 15.6" Full HD</li>
-                    <li>Sistema Operacional: Linux</li>
-                </ul>
-                <button class="btn btn-primary mt-3 text-uppercase fw-bold px-5 py-3">
-                    <span class="material-symbols-outlined align-bottom">shopping_cart</span>
-                    Comprar
-                </button>
+                <p class="product-description" th:utext="${#strings.replace(produto.descricao, '\n', '<br/>')}"></p>
             </div>
         </div>
     </div>

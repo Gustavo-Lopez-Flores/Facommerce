@@ -49,6 +49,15 @@ public class UsuarioService {
         return usuarioOpt.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
+    public boolean ehAdmin(Usuario usuario) {
+        return usuario.getTipoUsuario() == TipoUsuario.ADMIN;
+    }
+
+    public boolean ehAdmin(String cpf) {
+        Usuario usuario = buscarPorCpf(cpf);
+        return ehAdmin(usuario);
+    }
+
     public Usuario atualizar(String cpf, Usuario usuarioAtualizado) {
         Usuario usuario = buscarPorCpf(cpf);
         usuario.setNome(usuarioAtualizado.getNome());
