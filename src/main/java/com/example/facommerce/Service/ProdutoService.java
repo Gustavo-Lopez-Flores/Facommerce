@@ -3,6 +3,7 @@ package com.example.facommerce.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.facommerce.DTO.CadastroProdutoDTO;
 import com.example.facommerce.Model.Produto;
 import com.example.facommerce.Repository.ProdutoRepository;
 
@@ -12,12 +13,25 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository repository;
 
+    @Autowired
+    private CategoriaService categoriaService;
+
     public Iterable<Produto> listarTodos() {
         return repository.findAll();
     }
 
-    public Produto cadastrar(Produto produto) {
-        return repository.save(produto);
+    public Produto cadastrar(CadastroProdutoDTO produto) {
+        System.out.println(produto.getCategoriaId());
+        Produto novoProduto = new Produto(
+                produto.getNome(),
+                produto.getDescricao(),
+                produto.getPreco(),
+                produto.getQuantidade(),
+                categoriaService.buscarPorId(produto.getCategoriaId()),
+                produto.getImagemUrl()
+        );
+
+        return repository.save(novoProduto);
     }
 
     public Produto buscarPorId(Long id) {

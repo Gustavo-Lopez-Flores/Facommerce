@@ -11874,5 +11874,8 @@ sub {
     min-height: 25rem;
   }
 }
+.product-description {
+  white-space: pre-line;
+}
 
 /*# sourceMappingURL=bootstrap.css.map */
